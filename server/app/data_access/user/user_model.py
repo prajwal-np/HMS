@@ -1,4 +1,4 @@
-from enum import Enum
+import enum
 from datetime import datetime 
 from sqlalchemy import Column, Integer, DateTime, String, Enum
 from sqlalchemy.orm import declarative_base
@@ -9,10 +9,10 @@ from sqlalchemy.orm import declarative_base
 # Usermetadata = Base.metadata
 Base = declarative_base()
 
-class RoleEnum(Enum):
-        SUPER_ADMIN='SUPER ADMIN'
-        ADMIN='ADMIN'
-        TENANT='TENANT'
+class RoleEnum(enum.Enum):
+        SUPER_ADMIN='Super Admin'
+        ADMIN='Admin'
+        TENANT='Tenant'
 
 class User(Base):
     __tablename__= 'users'
@@ -23,21 +23,21 @@ class User(Base):
     email= Column(String, nullable=False, unique=True)
     phone= Column(String, nullable=False, unique=True)
     password=Column(String, nullable=False)
-    # role = Column(Enum(RoleEnum), nullable=False)
+    role = Column(Enum(RoleEnum), nullable=False)
 
     def dict(self):
         return {
             'name': self.name,
             'email': self.email,
             'phone': self.phone,
-            # 'role': self.role,
+            'role': self.role,
         }
     def dict_with_password(self):
         return {
             'name': self.name,
             'email': self.email,
             'phone': self.phone,
-            'password': self.password
-            # 'role': self.role,
+            'password': self.password,
+            'role': self.role
         }
 
