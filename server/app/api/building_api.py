@@ -1,4 +1,3 @@
-from schemas.user_schema import UserSchema, LoginUserModel, LoggedUser
 from schemas.building_schema import InsertBuilding, BuildingSchema
 from fastapi import APIRouter, HTTPException, Depends
 from starlette import status

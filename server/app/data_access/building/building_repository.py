@@ -2,7 +2,6 @@ from ..repositories_base import BaseRepository
 from typing import Union
 from schemas.building_schema import BuildingSchema, InsertBuilding, UpdateBuilding
 from .building_model import Building
-from sqlalchemy import select
 
 class BuildingRepo(BaseRepository):
     
@@ -18,18 +17,13 @@ class BuildingRepo(BaseRepository):
                 three_bed = data.three_bed,
                 four_bed= data.four_bed
                 )
-            print(self.session)
-            self.session.add(building)
-            self.session.commit()
-            return building.dict()
+            return super().add(building)
         except Exception as e:
             print(e)
             raise e
     
     def get(self, id: Union[str, int]):
-        stmt = select(Building).where(Building.id.__eq__(id))
-        result = self.session.scalar(stmt)
-        return result.dict()
+        return super().get(Building, id)
     
     def update(self, data: UpdateBuilding):
         build:Building = self.session.query(Building).get(data.id)
@@ -42,11 +36,7 @@ class BuildingRepo(BaseRepository):
             three_bed = data.three_bed,
             four_bed = data.four_bed
         )
-        self.session.add(build)
-        self.session.commit()
-        return build.dict()
+        return super().add(build)
 
     def delete(self, id: Union[str, int]):
-        self.session.query(Building).where(Building.id.__eq__(id)).delete()
-        self.session.commit()
-        return 'deleted'
+        return super().delete(Building, id)
