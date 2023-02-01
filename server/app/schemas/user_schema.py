@@ -1,6 +1,6 @@
 
 from pydantic import BaseModel
-from app.data_access.user.user_model import RoleEnum
+from data_access.user.user_model import RoleEnum
 class UserSchema(BaseModel):
     name: str
     email: str

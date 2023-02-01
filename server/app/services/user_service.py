@@ -1,8 +1,8 @@
 from starlette.requests import Request
-from app.schemas.user_schema import UserSchema, InsertUser
-from app.utils.crypt import verify_password
-from app.utils.jwt import generate_token
-from app.data_access.user.user_repository import UserRepository, RoleEnum
+from schemas.user_schema import UserSchema, InsertUser
+from utils.crypt import verify_password
+from utils.jwt import generate_token
+from data_access.user.user_repository import UserRepository, RoleEnum
 from sqlalchemy.orm import Session
 
 def register_user(request:Request, user: InsertUser)-> UserSchema:

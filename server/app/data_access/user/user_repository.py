@@ -1,8 +1,8 @@
-from app.data_access.user.user_model import User, RoleEnum
-from app.schemas.user_schema import InsertUser
+from data_access.user.user_model import User, RoleEnum
+from schemas.user_schema import InsertUser
 from sqlalchemy import select, exc
 from sqlalchemy.orm import Session
-from app.utils.crypt import get_password_hash
+from utils.crypt import get_password_hash
 
 class UserRepository:
     def __init__(self, session: Session):
@@ -18,6 +18,7 @@ class UserRepository:
                 password= get_password_hash(user.password)
             )
             self.session.add(user_res)
+            self.session.commit()
             return user_res.dict()
         except exc.SQLAlchemyError:
             raise exc.SQLAlchemyError

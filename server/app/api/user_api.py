@@ -1,12 +1,13 @@
-from app.schemas.user_schema import UserSchema, InsertUser, LoginUserModel, LoggedUser
+from schemas.user_schema import UserSchema, InsertUser, LoginUserModel, LoggedUser
 from fastapi import APIRouter, HTTPException, Depends
 from starlette import status
 from starlette.requests import Request
-from app.services.user_service import authenticate_user, register_user, get_user_by_email
-from app.utils.middleware import Middleware
-router = APIRouter()
+from services.user_service import authenticate_user, register_user, get_user_by_email
+from utils.middleware import Middleware
 
-@router.post("/", status_code=status.HTTP_201_CREATED, response_model=UserSchema)
+router = APIRouter(tags=['User'])
+
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=str)
 def create_user(request: Request, user: InsertUser):
     try:
         response = register_user(request=request, user=user)

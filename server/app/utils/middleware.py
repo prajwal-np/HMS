@@ -1,5 +1,5 @@
 from fastapi import HTTPException, Header
-from app.utils.jwt import decode_token
+from utils.jwt import decode_token
 from datetime import datetime
 
 async def Middleware(x_token: str = Header()):
