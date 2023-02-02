@@ -4,10 +4,11 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-from app.data_access.user.user_model import Base as UserBase
-from app.data_access.building.building_model import Base as BuildingBase
-from app.data_access.tenant.tenant_model import Base as TenantBase
-from app.data_access.food_routine.food_routine_model import Base as FoodRoutineBase
+from data_access.user.user_model import Base as UserBase
+from data_access.building.building_model import Base as BuildingBase
+from data_access.tenant.tenant_model import Base as TenantBase
+from data_access.food_routine.food_routine_model import Base as FoodRoutineBase
+from data_access.transaction.transaction_model import Base as TransactionBase
 
 
 import sys
@@ -30,7 +31,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = [UserBase.metadata, BuildingBase.metadata, TenantBase.metadata, FoodRoutineBase.metadata]
+target_metadata = [UserBase.metadata, BuildingBase.metadata, TenantBase.metadata, FoodRoutineBase.metadata, TransactionBase.metadata]
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
