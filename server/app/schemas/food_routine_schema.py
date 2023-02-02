@@ -1,9 +1,14 @@
-class FoodRoutineSchema:
+from pydantic import BaseModel
+from datetime import datetime
+from typing import Optional
+
+class FoodRoutineSchema(BaseModel):
+    id:Optional[int]
     building: int
-    lunch_time: int
-    break_fast_time: int
-    snack_time: int
-    dinner_time: int
+    lunch_time: datetime
+    break_fast_time: datetime
+    snack_time: datetime
+    dinner_time: datetime
 
 class InsertFoodRoutine(FoodRoutineSchema):
     pass

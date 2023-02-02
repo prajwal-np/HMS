@@ -1,6 +1,7 @@
 from datetime import datetime 
 from sqlalchemy import Column, Integer, DateTime, String
 from sqlalchemy.orm import declarative_base
+from schemas.tenant_schema import UpdateTenant
 # from sqlalchemy.dialects.postgresql import UUID
 # import uuid
 
@@ -25,8 +26,16 @@ class Tenant(Base):
             'id': self.id,
             'building': self.building,
             'room_type': self.room_type,
-            'break_fast_time': self.break_fast_time,
-            'snack_time': self.snack_time,
-            'dinner_time': self.dinner_time,
+            'current_status': self.current_status,
+            'user': self.user,
         }
+    
+    def update(self, data: UpdateTenant):
+        self.building= data.building
+        self.room_type= data.room_type
+        self.current_status= data.current_status
+        self.user= data.user
+
+
+    
 

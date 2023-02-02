@@ -1,6 +1,9 @@
 from datetime import datetime 
 from sqlalchemy import Column, Integer, DateTime
 from sqlalchemy.orm import declarative_base
+from schemas.food_routine_schema import UpdateFoodRoutine
+from datetime import datetime
+
 # from sqlalchemy.dialects.postgresql import UUID
 
 # import uuid
@@ -31,4 +34,10 @@ class FoodRoutine(Base):
             'snack_time': self.snack_time,
             'dinner_time': self.dinner_time,
         }
+    def update(self, data:UpdateFoodRoutine):
+            self.building= data.building,
+            self.lunch_time= data.lunch_time
+            self.break_fast_time= data.break_fast_time,
+            self.snack_time= data.snack_time,
+            self.dinner_time= data.dinner_time,
 

@@ -35,7 +35,7 @@ class Building(Base):
             'four_bed': self.four_bed,
             'createdBy': self.createdBy
         }
-    def update(self, name: str, location: str, capacity: int, single_bed: int,double_bed: int, three_bed:int, four_bed: int,  **kwargs):
+    def update(self, name: str, location: str, capacity: int, single_bed: int,double_bed: int, three_bed:int, four_bed: int):
         self.name = name
         self.location = location
         self.capacity = capacity

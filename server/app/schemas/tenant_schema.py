@@ -1,4 +1,7 @@
-class TenantSchema:
+from pydantic import BaseModel
+from typing import Optional
+class TenantSchema(BaseModel):
+    id: Optional[int]
     building:int
     room_type: str
     current_status: str
