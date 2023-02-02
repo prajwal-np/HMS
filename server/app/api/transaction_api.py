@@ -5,7 +5,7 @@ from starlette.requests import Request
 from utils.middleware import Middleware
 from services.transaction import delete_transaction,get_transaction,insert_transaction,update_transaction
 
-router = APIRouter(prefix='/transaction',tags=['Transaction'])
+router = APIRouter(prefix='/transaction',tags=['Transaction'], dependencies=[Depends(Middleware)])
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=TransactionSchema)
 def create_transaction(request: Request, user: InsertTransaction):

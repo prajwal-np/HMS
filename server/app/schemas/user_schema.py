@@ -14,6 +14,12 @@ class InsertUser(BaseModel):
     phone: str
     password: str
 
+class RegisterUser(BaseModel):
+    name: str
+    email: str
+    role: RoleEnum
+    phone: str
+
 class LoggedUser(UserSchema):
     token: str
 
