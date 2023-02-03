@@ -1,6 +1,7 @@
 from datetime import datetime 
-from sqlalchemy import Column, Integer, DateTime, String
-from sqlalchemy.orm import declarative_base
+from sqlalchemy import Column, Integer, DateTime, String, ForeignKey
+from sqlalchemy.orm import declarative_base, relationship
+from ..user.user_model import User
 # from sqlalchemy.dialects.postgresql import UUID
 # import uuid
 
@@ -15,14 +16,18 @@ class Building(Base):
     id = Column(Integer, primary_key=True)
     created = Column(DateTime, nullable=False, default=datetime.utcnow)
     createdBy = Column(Integer, nullable=False, default=datetime.utcnow)
-    name = Column(String, nullable=False)
-    location= Column(String, nullable=False)
+    name = Column(String(50), nullable=False)
+    location= Column(String(50), nullable=False)
     capacity=Column(Integer,nullable=False)
     single_bed=Column(Integer,nullable=True)
     double_bed=Column(Integer,nullable=True)
     three_bed=Column(Integer,nullable=True)
     four_bed=Column(Integer,nullable=True)    
-
+    transaction=relationship('Transaction')
+    food_routine= relationship('FoodRoutine')
+    user_id= Column(Integer,ForeignKey(User.id))
+    user = relationship("User", back_populates="building")
+   
     def dict(self):
         return {
             'id': self.id,

@@ -1,8 +1,9 @@
 from datetime import datetime 
-from sqlalchemy import Column, Integer, DateTime
+from sqlalchemy import Column, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import declarative_base
 from schemas.food_routine_schema import UpdateFoodRoutine
 from datetime import datetime
+from ..building.building_model import Building
 
 # from sqlalchemy.dialects.postgresql import UUID
 
@@ -19,7 +20,7 @@ class FoodRoutine(Base):
     # id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.UUID)
     id = Column(Integer, primary_key=True)
     created = Column(DateTime, nullable=False, default=datetime.utcnow)
-    building = Column(Integer, nullable=False, default=datetime.utcnow)
+    building = Column(Integer,ForeignKey(Building.id), nullable=False, default=datetime.utcnow)
     lunch_time= Column(DateTime, nullable=True)
     break_fast_time= Column(DateTime, nullable=True) 
     snack_time= Column(DateTime, nullable=True) 

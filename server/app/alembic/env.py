@@ -9,7 +9,7 @@ from data_access.building.building_model import Base as BuildingBase
 from data_access.tenant.tenant_model import Base as TenantBase
 from data_access.food_routine.food_routine_model import Base as FoodRoutineBase
 from data_access.transaction.transaction_model import Base as TransactionBase
-
+from data_access.token.token_model import Base as TokenBase
 
 import sys
 import os
@@ -31,7 +31,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = [UserBase.metadata, BuildingBase.metadata, TenantBase.metadata, FoodRoutineBase.metadata, TransactionBase.metadata]
+target_metadata = [UserBase.metadata, BuildingBase.metadata, TenantBase.metadata, FoodRoutineBase.metadata, TransactionBase.metadata, TokenBase.metadata]
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

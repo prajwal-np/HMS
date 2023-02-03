@@ -7,7 +7,7 @@ from utils.middleware import Middleware
 
 router = APIRouter(tags=['User'])
 
-@router.post("/", status_code=status.HTTP_201_CREATED, response_model=str)
+@router.post("/", status_code=status.HTTP_201_CREATED)
 def create_user(request: Request, user: InsertUser):
     try:
         response = register_user(request=request, user=user)
@@ -17,7 +17,7 @@ def create_user(request: Request, user: InsertUser):
         raise HTTPException(status_code=403,detail='Cannot register')
 
 
-@router.post("/login", status_code=status.HTTP_201_CREATED, response_model=LoggedUser)
+@router.post("/login", status_code=status.HTTP_201_CREATED)
 def login_user(request: Request, login_request: LoginUserModel):
     try:
         response = authenticate_user(request, email=login_request.email, password=login_request.password)

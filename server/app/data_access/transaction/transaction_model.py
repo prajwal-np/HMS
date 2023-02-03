@@ -1,6 +1,9 @@
 from datetime import datetime 
-from sqlalchemy import Column, Integer, DateTime, String
+from sqlalchemy import Column, Integer, DateTime, String, ForeignKey
 from sqlalchemy.orm import declarative_base
+from ..user.user_model import User
+from ..building.building_model import Building
+
 # from sqlalchemy.dialects.postgresql import UUID
 # import uuid
 
@@ -14,14 +17,14 @@ class Transaction(Base):
     # id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.UUID)
     id = Column(Integer, primary_key=True)
     created = Column(DateTime, nullable=False, default=datetime.utcnow)
-    user = Column(Integer, nullable=False)
-    building = Column(Integer, nullable=False)
-    type = Column(String, nullable=False)
-    amount= Column(String, nullable=False)
-    image=Column(String, nullable=False)
-    remark=Column(String, nullable=False)
-    month=Column(String, nullable=False)
-    payment_method= Column(String, nullable=False)
+    user = Column(Integer, ForeignKey(User.id), nullable=False)
+    building = Column(Integer,ForeignKey(Building.id), nullable=False)
+    type = Column(String(50), nullable=False)
+    amount= Column(String(50), nullable=False)
+    image=Column(String(50), nullable=False)
+    remark=Column(String(50), nullable=False)
+    month=Column(String(50), nullable=False)
+    payment_method= Column(String(50), nullable=False)
 
     def dict(self):
         return {

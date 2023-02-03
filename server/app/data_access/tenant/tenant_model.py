@@ -1,7 +1,9 @@
 from datetime import datetime 
-from sqlalchemy import Column, Integer, DateTime, String
-from sqlalchemy.orm import declarative_base
+from sqlalchemy import Column, Integer, DateTime, String, ForeignKey
+from sqlalchemy.orm import declarative_base, relationship
 from schemas.tenant_schema import UpdateTenant
+from ..user.user_model import User
+
 # from sqlalchemy.dialects.postgresql import UUID
 # import uuid
 
@@ -16,10 +18,10 @@ class Tenant(Base):
     id = Column(Integer, primary_key=True)
     created = Column(DateTime, nullable=False, default=datetime.utcnow)
     building = Column(Integer, nullable=False)
-    room_type = Column(String, nullable=False)
-    current_status = Column(String, nullable=False)
-    user = Column(Integer, nullable=False)
-    
+    room_type = Column(String(50), nullable=False)
+    current_status = Column(String(50), nullable=False)
+    user_id = Column(Integer,ForeignKey(User.id), nullable=False)
+    user = relationship("User", back_populates="tenant")
 
     def dict(self):
         return {

@@ -1,18 +1,17 @@
 
 from pydantic import BaseModel
+from typing import Optional
 from data_access.user.user_model import RoleEnum
 class UserSchema(BaseModel):
     name: str
     email: str
     role: RoleEnum
     phone: str
+    password: Optional[str]
+    # verifed: bool
 
-class InsertUser(BaseModel):
-    name: str
-    email: str
-    role: RoleEnum
-    phone: str
-    password: str
+class InsertUser(UserSchema):
+    pass
 
 class RegisterUser(BaseModel):
     name: str

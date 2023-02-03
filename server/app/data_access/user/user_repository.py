@@ -3,8 +3,8 @@ from schemas.user_schema import InsertUser
 from sqlalchemy import select, exc
 from sqlalchemy.orm import Session
 from utils.crypt import get_password_hash
-
-class UserRepository:
+from ..repositories_base import BaseRepository
+class UserRepository(BaseRepository):
     def __init__(self, session: Session):
         self.session = session
     
@@ -17,11 +17,10 @@ class UserRepository:
                 role= RoleEnum(user.role).name,
                 password= get_password_hash(user.password)
             )
-            self.session.add(user_res)
-            self.session.commit()
-            return user_res.dict()
-        except exc.SQLAlchemyError:
-            raise exc.SQLAlchemyError
+            return super().add(user_res)
+        except Exception as e:
+            print(e)
+            raise e
 
     def find_one_by_email(self, email: str):
         stmt = select(User).where(User.email.__eq__(email))
